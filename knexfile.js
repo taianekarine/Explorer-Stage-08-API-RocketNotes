@@ -9,7 +9,7 @@ module.exports = {
     },
     
     pool:{
-      afterCreate: (conn, cb) => conn.run('PRAGMA foreing_keys = on', cb)
+      afterCreate: (conn, cb) => conn.run('PRAGMA foreing_keys = ON', cb)
     },
 
     migrations: {
