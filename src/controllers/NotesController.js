@@ -12,27 +12,31 @@ class NotesController {
       user_id
     });
 
-    const linksInsert = links.map( link => {
+    const linksInsert = links.map(link => {
       return {
         note_id,
         url: link
       }
-    });
+      });
 
     await knex('links').insert(linksInsert);
 
     const tagsInsert = tags.map(name => {
-      return {
-        note_id,
-        name,
-        user_id
-      }
-    });    
+    return {
+      note_id,
+      user_id,
+      name
+    }
+    });
 
-    await knex('tags').insert(tagsInsert);
+  await knex('tags').insert(tagsInsert);
 
-    response.json();
-  }
+  return response.json();
+
+};
+
+
+
 
   async show( request, response ) {
     const { id } = request.params;
