@@ -1,7 +1,9 @@
-//Validndo dados do usuario.
+//Validndo dados do usuario. # Biblioteca para gerar o token npm  install jsonwebtoken
 const knex = require('../database/knex');
 const AppError = require ('../utils/AppError');
-const { compare } = require('bcryptjs')
+const { compare } = require('bcryptjs');
+const authConfig = require('../Configs/auth'); //Criando token
+const { sign } = require ('jsonwebtoken'); //Criando token
 
 
 class SessionsController {
@@ -19,9 +21,14 @@ class SessionsController {
     if(!passwordMatched) {
       throw new AppError('E-mail ou senha incorreta.', 401);
     }
+    //Criando token
+    const { secret, expiresIn } = authConfig.jwt;
+    const token = sign({}, secret, {
+      subject: String(user.id),
+      expiresIn
+    })
 
-
-    return response.json(user)
+    return response.json({ user, token })
   };
 };
 
