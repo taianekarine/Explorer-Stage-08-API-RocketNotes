@@ -18,6 +18,4 @@ usersRoutes.put('/', ensureAuthenticated, usersController.update); // ensureAuth
 usersRoutes.patch('/avatar', ensureAuthenticated, uplodad.single('avatar'), userAvatarController.update);
 
 
-
-
 module.exports = usersRoutes;
